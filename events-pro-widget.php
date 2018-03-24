@@ -58,9 +58,18 @@ class TWD_Events_Pro_Widget extends WP_Widget {
               <?php if (tribe_event_is_all_day()) : ?>
                 <?php _e('All day event', 'tw') ?>
               <?php else : ?>
-                <?php echo tribe_get_start_time($post->ID) ?> - <?php echo tribe_get_end_time($post->ID) ?>
-                &middot;
-                <?php echo human_time_diff($startDate, $endDate) ?>
+                <?php
+                  $start_d = tribe_get_start_time($post->ID);
+                  $end_d = tribe_get_end_time($post->ID);
+                ?>
+                <?php if($start_d){ ?>
+                  <?php echo $start_d ?>
+                  <?php if($end_d){ ?>
+                    <?php echo ' - ' . $end_d ?>
+                    &middot;
+                    <?php echo human_time_diff($startDate, $endDate) ?>
+                  <?php } ?>
+                <?php } ?>
               <?php endif ?>
             </p>
           </div>
